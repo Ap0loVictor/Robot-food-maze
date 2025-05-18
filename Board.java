@@ -16,7 +16,7 @@ public class Board
     {
         this.foodX = foodX;
         this.foodY = foodY;
-        ArrayList<String>[][] tabuleiroVisual = new ArrayList[4][4];
+        ArrayList<Integer>[][] tabuleiroVisual = new ArrayList[4][4];
         for (int i = 0; i < 4; i++) 
         {
             for (int j = 0; j < 4; j++) {
@@ -31,10 +31,10 @@ public class Board
             for (int i = 0; i < 4; i++) {
                 for (int j = 0; j < 4; j++) {
                     if ((i == foodY)&& (j == foodX)){
-                        System.out.print(".[Comida]\t"); 
+                        System.out.print("[" + 5 + "]\t"); 
                     }
                     else{
-                    System.out.print(".[" + tabuleiroVisual[i][j].size() + "]\t");} 
+                    System.out.print("[" + tabuleiroVisual[i][j].size() + "]\t");} 
                 }
                 System.out.println();
             }
