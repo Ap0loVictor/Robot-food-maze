@@ -9,7 +9,10 @@ public class Robot {
         this.color = color;
     }
 
-
+    public void moveRobot(int positionX, int positionY){
+        this.positionX = positionX;
+        this.positionY = positionY;
+    }
 
     public int getPositionX() {
         return positionX;
