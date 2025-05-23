@@ -16,32 +16,40 @@ public class Board
     {
         this.foodX = foodX;
         this.foodY = foodY;
-        ArrayList<String>[][] tabuleiroVisual = new ArrayList[4][4];
+
+        tabuleiroVisual = new ArrayList[4][4];
+
         for (int i = 0; i < 4; i++) 
         {
             for (int j = 0; j < 4; j++) {
                 tabuleiroVisual[i][j] = new ArrayList<>();
             }
         }
-
+        Robot robot = new Robot("vermelho");
+        tabuleiroVisual[0][0].add(robot);
+        
     }
-
     public void printVisualBoard() {
         System.out.println("\n==========================");
-            for (int i = 0; i < 4; i++) {
-                for (int j = 0; j < 4; j++) {
-                    if ((i == foodY)&& (j == foodX)){
-                        System.out.print(".[Comida]\t"); 
+        for (int i = 0; i < 4; i++) {  
+            for (int j = 0; j < 4; j++) {  
+                if (i == foodY && j == foodX) {
+                    System.out.print(".[Comida]\t");
+                } else if (!tabuleiroVisual[i][j].isEmpty()) {
+                    System.out.print(".[");
+                    for (Robot r : tabuleiroVisual[i][j]) {
+                        System.out.print(r.getColor() + "");
                     }
-                    else{
-                    System.out.print(".[" + tabuleiroVisual[i][j].size() + "]\t");} 
+                    System.out.print("]\t");
+                } else {
+                    System.out.print(".[ ]\t");
                 }
-                System.out.println();
             }
-        
+            System.out.println();  
+        }
         System.out.println("=================================");
     }
-
+    
     public void updateBoard(List<Robot>[][]  tabuleiroVisual){
 
     }

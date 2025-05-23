@@ -3,9 +3,9 @@ public class Robot {
     protected int positionY;
     protected String color;
 
-    public Robot(int positionX, int positionY, String color) {
-        this.positionX = positionX;
-        this.positionY = positionY;
+    public Robot(String color) {
+        this.positionX = 0;
+        this.positionY = 0;
         this.color = color;
     }
 
@@ -26,11 +26,11 @@ public class Robot {
         return color;
     }
 
-    public void getPositionX(int positionX) {
+    public void setPositionX(int positionX) {
         this.positionX = positionX;
     }
 
-    public void getPositionY(int positionX) {
+    public void setPositionY(int positionX) {
         this.positionY = positionX;
     }
 
