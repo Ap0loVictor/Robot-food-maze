@@ -1,17 +1,40 @@
+import java.util.Scanner;
 public class Robot {
     protected int[] position;
     protected String color;
+    Scanner sc = new Scanner(System.in);
 
     public Robot(String color) {
         position = new int[2];
         this.color = color;
     }
 
-    public void moveRobot(int positionX, int positionY){
+    public void moveRobot(String sc){
+        int positionX = position[0];
+        int positionY = position[1];
+        sc = sc.toLowerCase();
+
+        switch(sc)
+        {
+            case "up":
+                positionY--;
+                break;
+            case "down":
+                positionY++;
+                break;
+            case "left":
+                positionX--;
+                break;
+            case "right":
+                positionX++;
+                break;
+            default:
+                System.out.println("Comando inválido!");
+                return; 
+        }
         this.position[0] = positionX;
         this.position[1] = positionY;
-    }
-
+        }
    
     public String getColor() {
         return color;
