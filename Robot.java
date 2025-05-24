@@ -35,7 +35,7 @@ public class Robot {
         this.position[0] = positionX;
         this.position[1] = positionY;
         }
-
+   
     public String getColor() {
         return color;
     }
