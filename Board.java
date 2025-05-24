@@ -34,16 +34,16 @@ public class Board
                 for (int j = 0; j < 4; j++) {
                     if ((i == foodY)&& (j == foodX)){
 
-                        System.out.print(".[" + 5 + "]\t"); 
+                        System.out.print("[" + 5 + "]\t"); 
                     }
                     else if (!tabuleiroVisual[i][j].isEmpty()) {    
-                        System.out.print(".[");
+                        System.out.print("[");
                         for (Robot r : tabuleiroVisual[i][j]) {
                             System.out.print(r.getColor() + ""); 
                         }
                         System.out.print("]\t");
                     } else {
-                    System.out.print(".[ VAZIO ]\t");
+                    System.out.print("[ VAZIO ]\t");
                 } 
                 }
                 System.out.println();
@@ -72,8 +72,17 @@ public class Board
         System.out.println("Você esbarrou na parede inferior!");
     }
     }
-    public void updateBoard(List<Robot>[][]  tabuleiroVisual){
+    public void updateBoard(Robot robot){
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                tabuleiroVisual[i][j].remove(robot);
+            }
+        }
 
+        // Adiciona o robô na nova posição
+        int x = robot.position[0];
+        int y = robot.position[1];
+        tabuleiroVisual[y][x].add(robot);
     }
     
 }

@@ -13,7 +13,7 @@ Com base nessa descrição, faça o que se pede:
     Crie também métodos de get e set para as posições.
 
 - Crie um método mover, que recebe como parâmetro uma String e altera a posição do robô da seguinte forma: 
-    -“up” move o robô no eixo y em uma posição acima. 
+    - “up” move o robô no eixo y em uma posição acima. 
     - “down” move o robô no eixo y em uma posição abaixo.
     - “right” move o robô no eixo x em uma posição para a direita.
     - “left” move o robô no eixo x em uma posição para a esquerda.
