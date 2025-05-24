@@ -24,8 +24,6 @@ public class Board
                 this.tabuleiroVisual[i][j] = new ArrayList<>();
             }
         }
-            Robot robot = new Robot("vermelho");
-            tabuleiroVisual[0][0].add(robot);
     }
 
     public void printVisualBoard() {
@@ -55,6 +53,7 @@ public class Board
     public void moveRobotWithLimits(Robot r) {
         int newX = r.position[0];
         int newY = r.position[1];
+        
 
     if (newX < 0) {
         newX = 0;
@@ -75,5 +74,19 @@ public class Board
     public void updateBoard(List<Robot>[][]  tabuleiroVisual){
 
     }
-    
+    public boolean foundFood(Robot r){
+        return r.position[0] == foodX && r.position[1] == foodY ;
+    }
+    public int getFoodX() {
+        return foodX;
+    }
+    public void setFoodX(int foodX) {
+        this.foodX = foodX;
+    }
+    public int getFoodY() {
+        return foodY;
+    }
+    public void setFoodY(int foodY) {
+        this.foodY = foodY;
+    }
 }
