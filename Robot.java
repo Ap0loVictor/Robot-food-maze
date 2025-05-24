@@ -35,7 +35,31 @@ public class Robot {
         this.position[0] = positionX;
         this.position[1] = positionY;
         }
-   
+        public void moveRobot(int move){
+        int positionX = position[0];
+        int positionY = position[1];
+        switch(move)
+        {
+            case 1:
+                positionY--;
+                break;
+            case 2:
+                positionY++;
+                break;
+            case 3:
+                positionX--;
+                break;
+            case 4:
+                positionX++;
+                break;
+            default:
+                System.out.println("Comando inválido!");
+                return; 
+        }
+        this.position[0] = positionX;
+        this.position[1] = positionY;
+        }
+    
     public String getColor() {
         return color;
     }
