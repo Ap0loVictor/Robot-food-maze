@@ -3,21 +3,29 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Board board = new Board(2, 3);
+        Board board = null;
         Robot robot = null;
 
         int menu = 1;
         while (menu == 1) {
-            System.out.println("Escreva uma cor para o robô e comece a jogar!");
+            System.out.println("Escreva uma cor para o robô:");
             String comando = scanner.nextLine();
+            
+            System.out.println("Ecolha a posição do eixo X da comida: ");
+            int eixoXComida = scanner.nextInt();
+            System.out.println("Ecolha a posição do eixo Y da comida: ");
+            int eixoYComida = scanner.nextInt();
+            board = new Board(eixoXComida-1, eixoYComida-1);
+
             robot = new Robot(comando);
+            
             menu = 2;
         }
         while (menu == 2) {
             board.updateBoard(robot);
             board.printVisualBoard();
 
-            System.out.print("Digite o comando para mover o robô (1/up, 2/down, 3/left, 4/right) ou 'sair' para encerrar: ");
+            System.out.print("Mover o robô: (1/up, 2/down, 3/left, 4/right) ou 'sair' para encerrar: ");
             String comando = scanner.nextLine();
 
             if (comando.equalsIgnoreCase("sair")) {
@@ -38,7 +46,6 @@ public class Main {
         }
         scanner.close();
     }
-
 }
 /*
     Main1 : Crie uma classe Main que instancie um robô, peça ao usuário para determinar a posição do alimento, 
