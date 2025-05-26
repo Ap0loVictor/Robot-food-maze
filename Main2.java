@@ -33,22 +33,27 @@ public class Main2 {
             board.updateBoard(robot2);
             board.printVisualBoard();
 
-            int mover1 = rand.nextInt(3); 
-            int mover2 = rand.nextInt(3);
+            int mover1 = rand.nextInt(4); 
+            int mover2 = rand.nextInt(4);
 
             robot1.moveRobot(mover1+1); 
             robot2.moveRobot(mover2+1); 
             if(board.foundFood(robot1)){
-                System.out.println("O Robo " + robot1.getColor() + " encontrou a comida, Fim de Jogo!");
+                board.updateBoard(robot1);
+                board.updateBoard(robot2);
+                board.printVisualBoard();
+                System.out.println("O Robo de cor " + robot1.getColor() + " encontrou a comida, Fim de Jogo!");
                 break;
             }
             if(board.foundFood(robot2)){
-                System.out.println("O Robo " + robot2.getColor() + " encontrou a comida, Fim de Jogo!");
+                board.updateBoard(robot1);
+                board.updateBoard(robot2);
+                board.printVisualBoard();
+                System.out.println("O Robo de cor " + robot2.getColor() + " encontrou a comida, Fim de Jogo!");
                 break;
             }
         }
         scanner.close();
-    
     }
 }
 /*
