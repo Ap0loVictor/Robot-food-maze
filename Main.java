@@ -1,4 +1,8 @@
 import java.util.Scanner;
+import java.awt.*;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,8 +17,10 @@ public class Main {
             
             System.out.println("Ecolha a posição do eixo X da comida: ");
             int eixoXComida = scanner.nextInt();
+            scanner.nextLine();
             System.out.println("Ecolha a posição do eixo Y da comida: ");
             int eixoYComida = scanner.nextInt();
+            scanner.nextLine();
             board = new Board(eixoXComida-1, eixoYComida-1);
 
             robot = new Robot(comando);
@@ -35,14 +41,48 @@ public class Main {
 
             if (comando.matches("[1-4]")) {
                 int movimento = Integer.parseInt(comando);
-                robot.moveRobot(movimento); 
+                if (!robot.moveRobot(movimento)) {
+                    JFrame frame = new JFrame();
+                    ImageIcon icon = new ImageIcon("C://Users//guilh//Downloads//Parede.jpg");
+                    Image image = icon.getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH);
+                    ImageIcon resizedIcon = new ImageIcon(image);
+                    frame.setAlwaysOnTop(true);
+                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    frame.setVisible(false);
+                    frame.setUndecorated(true);
+                    frame.setType(JFrame.Type.UTILITY);
+                    JOptionPane.showMessageDialog(frame, "Movimento inválido! Esbarrou em uma parede!", "AVISO!", JOptionPane.WARNING_MESSAGE, resizedIcon);
+                } 
             } 
             else {
-                robot.moveRobot(comando); 
+                if(!robot.moveRobot(comando)) {
+                    JFrame frame = new JFrame();
+                    ImageIcon icon = new ImageIcon("C://Users//guilh//Downloads//Parede.jpg");
+                    Image image = icon.getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH);
+                    ImageIcon resizedIcon = new ImageIcon(image);
+                    frame.setAlwaysOnTop(true);
+                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    frame.setVisible(false);
+                    frame.setUndecorated(true);
+                    frame.setType(JFrame.Type.UTILITY);
+                    JOptionPane.showMessageDialog(frame, "Movimento inválido! Esbarrou em uma parede!", "AVISO!", JOptionPane.WARNING_MESSAGE, resizedIcon);
+                } 
             }
-
-            board.moveRobotWithLimits(robot);
-
+            board.updateBoard(robot);
+            if(board.foundFood(robot)){
+                ImageIcon icon = new ImageIcon("C:/Users/guilh/Downloads/trofeu.png");
+                Image image = icon.getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH);
+                ImageIcon resizedIcon = new ImageIcon(image);
+                JFrame frame = new JFrame();
+                frame.setAlwaysOnTop(true);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setVisible(false);
+                frame.setUndecorated(true);
+                frame.setType(JFrame.Type.UTILITY);
+                JOptionPane.showMessageDialog(frame, "Comida encontrada! Fim de Jogo!", "Vitória!", JOptionPane.INFORMATION_MESSAGE, resizedIcon);
+                System.exit(0);
+                break;
+            }
         }
         scanner.close();
     }

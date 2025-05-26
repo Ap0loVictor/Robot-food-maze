@@ -1,15 +1,13 @@
-import java.util.Scanner;
 public class Robot {
     protected int[] position;
     protected String color;
-    Scanner sc = new Scanner(System.in);
-
+    protected int invalidMovement;
     public Robot(String color) {
         position = new int[2];
         this.color = color;
     }
 
-    public void moveRobot(String sc){
+    public boolean moveRobot(String sc){
         int positionX = position[0];
         int positionY = position[1];
         sc = sc.toLowerCase();
@@ -29,13 +27,16 @@ public class Robot {
                 positionX++;
                 break;
             default:
-                System.out.println("Comando inválido!");
-                return; 
+                return false; 
+        }
+        if (positionX < 0 || positionX > 3 || positionY < 0 || positionY > 3) {
+            return false; // Movimento inválido, não atualiza posição
         }
         this.position[0] = positionX;
         this.position[1] = positionY;
-        }
-        public void moveRobot(int move){
+        return true;
+    }
+    public boolean moveRobot(int move){
         int positionX = position[0];
         int positionY = position[1];
         switch(move)
@@ -53,12 +54,16 @@ public class Robot {
                 positionX++;
                 break;
             default:
-                System.out.println("Comando inválido!");
-                return; 
+                return false; 
+        }
+        if (positionX < 0 || positionX > 3 || positionY < 0 || positionY > 3) {
+            incrementInvalidMovement();
+            return false; // Movimento inválido, não atualiza posição
         }
         this.position[0] = positionX;
         this.position[1] = positionY;
-        }
+        return true;
+    }
     
     public String getColor() {
         return color;
@@ -66,5 +71,20 @@ public class Robot {
 
     public void setcolor(String color) {
         this.color = color;
+    }
+    public void setPosition(int[] position) {
+        this.position = position;
+    }
+    public int[] getPosition() {
+        return position;
+    }
+    public void setInvalidMovement(int invalidMovement) {
+        this.invalidMovement = invalidMovement;
+    }
+    public int getInvalidMovement() {
+        return invalidMovement;
+    }
+    public void incrementInvalidMovement(){
+        this.invalidMovement++;
     }
 }
