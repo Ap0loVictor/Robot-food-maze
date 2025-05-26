@@ -14,7 +14,7 @@ public class Main2 {
         while (menu == 1) {
             System.out.println("Escreva uma cor para o robô 1:");
             String comando1 = scanner.nextLine();
-            System.out.println("Escreva uma cor para o robô 1:");
+            System.out.println("Escreva uma cor para o robô 2:");
             String comando2 = scanner.nextLine();
 
             System.out.println("Ecolha a posição do eixo X da comida: ");
