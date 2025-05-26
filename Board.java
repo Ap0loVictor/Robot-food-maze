@@ -14,6 +14,9 @@ public class Board
 
     public Board(int foodX, int foodY) 
     {
+        if (foodX < 0 || foodX >= 4 || foodY < 0 || foodY >= 4) {
+        throw new IllegalArgumentException("Posição da comida está fora dos limites do tabuleiro (4x4).");
+    }
         this.foodX = foodX;
         this.foodY = foodY;
         this.tabuleiroVisual = new ArrayList[4][4];
@@ -68,8 +71,13 @@ public class Board
             }
     }
     public boolean foundFood(Robot r){
-        return r.position[0] == foodX && r.position[1] == foodY ;
-    }
+        if (r.position[0] == foodX && r.position[1] == foodY){
+            foodX = -1;
+            foodY = -1;
+        return true; 
+    } return false;
+    } 
+
     public int getFoodX() {
         return foodX;
     }
