@@ -38,8 +38,8 @@ public class Main3 {
             robot.moveRobot(mover1+1); 
             smartRobot.moveRobot(mover2+1); 
 
-            board.moveRobotWithLimits(smartRobot);
 
+            
         }
         scanner.close();
     

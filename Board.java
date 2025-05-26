@@ -32,16 +32,16 @@ public class Board
                 for (int j = 0; j < 4; j++) {
                     if ((i == foodY)&& (j == foodX)){
 
-                        System.out.print("[" + 5 + "]\t"); 
+                        System.out.print("[ " + "Food" + "  ]\t"); 
                     }
                     else if (!tabuleiroVisual[i][j].isEmpty()) {    
                         System.out.print("[");
                         for (Robot r : tabuleiroVisual[i][j]) {
-                            System.out.print(r.getColor() + ""); 
+                            System.out.print(r.getColor() + " "); 
                         }
                         System.out.print("]\t");
                     } else {
-                    System.out.print("[ VAZIO ]\t");
+                    System.out.print("[       ]\t");
                 } 
                 }
                 System.out.println();
@@ -50,38 +50,22 @@ public class Board
         System.out.println("=================================");
     }
 
-    public void moveRobotWithLimits(Robot r) {
-        int newX = r.position[0];
-        int newY = r.position[1];
-        
-
-    if (newX < 0) {
-        newX = 0;
-        System.out.println("Você esbarrou na parede esquerda!");
-    } else if (newX > 3) {
-        newX = 3;
-        System.out.println("Você esbarrou na parede direita!");
-    }
-
-    if (newY < 0) {
-        newY = 0;
-        System.out.println("Você esbarrou na parede superior!");
-    } else if (newY > 3) {
-        newY = 3;
-        System.out.println("Você esbarrou na parede inferior!");
-    }
-    }
     public void updateBoard(Robot robot){
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                tabuleiroVisual[i][j].remove(robot);
+        try {
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 4; j++) {
+                    tabuleiroVisual[i][j].remove(robot);
+                }
             }
-        }
 
         // Adiciona o robô na nova posição
-        int x = robot.position[0];
-        int y = robot.position[1];
-        tabuleiroVisual[y][x].add(robot);
+            int[] pos = robot.getPosition();
+            int x = pos[0];
+            int y = pos[1];
+            tabuleiroVisual[y][x].add(robot);   
+            } catch (ArrayIndexOutOfBoundsException error) {
+                robot.incrementInvalidMovement();
+            }
     }
     public boolean foundFood(Robot r){
         return r.position[0] == foodX && r.position[1] == foodY ;

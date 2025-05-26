@@ -5,11 +5,9 @@ public class Main2 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Random rand = new Random();
-
-        Board board = new Board(2, 3);
+        Board board = null;
         Robot robot1 = null;
         Robot robot2 = null;
-
         int menu = 1;
         while (menu == 1) {
             System.out.println("Escreva uma cor para o robô 1:");
@@ -19,8 +17,10 @@ public class Main2 {
 
             System.out.println("Ecolha a posição do eixo X da comida: ");
             int eixoXComida = scanner.nextInt();
+            scanner.nextLine();
             System.out.println("Ecolha a posição do eixo Y da comida: ");
             int eixoYComida = scanner.nextInt();
+            scanner.nextLine();
             board = new Board(eixoXComida-1, eixoYComida-1);
 
             robot1 = new Robot(comando1);
@@ -30,6 +30,7 @@ public class Main2 {
         }
         while (menu == 2) {
             board.updateBoard(robot1);
+            board.updateBoard(robot2);
             board.printVisualBoard();
 
             int mover1 = rand.nextInt(3); 
@@ -37,9 +38,14 @@ public class Main2 {
 
             robot1.moveRobot(mover1+1); 
             robot2.moveRobot(mover2+1); 
-
-            board.moveRobotWithLimits(robot1);
-
+            if(board.foundFood(robot1)){
+                System.out.println("O Robo " + robot1.getColor() + " encontrou a comida, Fim de Jogo!");
+                break;
+            }
+            if(board.foundFood(robot2)){
+                System.out.println("O Robo " + robot2.getColor() + " encontrou a comida, Fim de Jogo!");
+                break;
+            }
         }
         scanner.close();
     

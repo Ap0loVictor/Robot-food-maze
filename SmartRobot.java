@@ -4,9 +4,10 @@ public class SmartRobot extends Robot{
         super(color);
     }
     @Override
-    public void moveRobot(int move) {
+    public boolean moveRobot(int move) {
         // TODO Auto-generated method stub
         super.moveRobot(move);
+        return true;
     }
 
 }
