@@ -6,6 +6,8 @@ public abstract class Obstacle {
     protected int eixoY;
     public Obstacle(int eixoX, int eixoY){
         this.position = new int[2];
+        this.position[0] = eixoX;
+        this.position[1] = eixoY;
         this.id = nextId;
         nextId++;
         this.eixoX = eixoX;
@@ -16,7 +18,7 @@ public abstract class Obstacle {
         return id;
     }
     public int[] getPosition() {
-        return position;
+        return this.position;
     }
     public void setPosition(int[] position) {
         this.position = position;
