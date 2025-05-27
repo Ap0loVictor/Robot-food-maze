@@ -1,7 +1,12 @@
 import java.util.Scanner;
+import java.awt.*;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 
 public class Main4 {
     public static void main(String[] args) {
@@ -62,16 +67,67 @@ public class Main4 {
             
         }
         while (menu == 3) {
+
             board.updateBoard(robot);
+            board.updateBoard(smartRobot);
             board.printVisualBoard();
 
             int mover1 = rand.nextInt(4); 
-            int mover2 = rand.nextInt(4);
+            
+            robot.moveRobot(mover1 + 1); 
+            smartRobot.moveRobot(mover1 + 1); 
+            board.updateBoard(robot);
+            board.updateBoard(smartRobot);
+            if(board.foundFood(robot)){
+                board.printVisualBoard();
+                ImageIcon icon = new ImageIcon("C:/Users/guilh/Downloads/trofeu.png");
+                ImageIcon icon2 = new ImageIcon("C:/Users/guilh/Downloads/Robo.jpg");
+                Image image = icon.getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH);
+                Image image2 = icon2.getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH);
+                ImageIcon resizedIcon = new ImageIcon(image);
+                ImageIcon resizedIcon2 = new ImageIcon(image2);
+                JFrame frame = new JFrame();
+                frame.setAlwaysOnTop(true);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setVisible(false);
+                frame.setUndecorated(true);
+                frame.setType(JFrame.Type.UTILITY);
+                JOptionPane.showMessageDialog(frame, "O Robô " + robot.getColor() + " Encontrou a comida! Fim de Jogo!", "Vitória!", JOptionPane.INFORMATION_MESSAGE, resizedIcon);
+                JOptionPane.showMessageDialog(frame, "Número de movimentos do Robô " + robot.getColor() + " : " + robot.getGeralMoves() + 
+                    "\nNúmero de movimentos do Robô " + smartRobot.getColor() + " : " + smartRobot.getGeralMoves(),
+                    "Movimentos",
+                    JOptionPane.INFORMATION_MESSAGE, resizedIcon2
+                );
+          
+                System.exit(0);
+                break;
+            } 
+            if (board.foundFood(smartRobot)) {
+                board.printVisualBoard();
+                ImageIcon icon = new ImageIcon("C:/Users/guilh/Downloads/trofeu.png");
+                ImageIcon icon2 = new ImageIcon("C:/Users/guilh/Downloads/Robo.jpg");
+                Image image = icon.getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH);
+                Image image2 = icon2.getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH);
+                ImageIcon resizedIcon = new ImageIcon(image);
+                ImageIcon resizedIcon2 = new ImageIcon(image2);
+                JFrame frame = new JFrame();
+                frame.setAlwaysOnTop(true);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setVisible(false);
+                frame.setUndecorated(true);
+                frame.setType(JFrame.Type.UTILITY);
+                JOptionPane.showMessageDialog(frame, "O Robô " + smartRobot.getColor() + " Encontrou a comida! Fim de Jogo!", "Vitória!", JOptionPane.INFORMATION_MESSAGE, resizedIcon);
+                JOptionPane.showMessageDialog(frame, "Número de movimentos do Robô " + robot.getColor() + " : " + robot.getGeralMoves() + 
+                    "\nNúmero de movimentos do Robô " + smartRobot.getColor() + " : " + smartRobot.getGeralMoves(),
+                    "Movimentos",
+                    JOptionPane.INFORMATION_MESSAGE, resizedIcon2
+                );
+            
+                System.exit(0);
+                break;
+            }
 
-            robot.moveRobot(mover1+1); 
-            smartRobot.moveRobot(mover2+1); 
 
-    
 
         }
         scanner.close();
