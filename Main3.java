@@ -44,6 +44,7 @@ public class Main3 {
             smartRobot.moveRobot(mover1 + 1); 
             board.updateBoard(robot);
             board.updateBoard(smartRobot);
+            
             if(board.foundFood(robot)){
                 board.printVisualBoard();
                 ImageIcon icon = new ImageIcon("C:/Users/guilh/Downloads/trofeu.png");

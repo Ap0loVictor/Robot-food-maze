@@ -5,11 +5,12 @@ public class Robot {
     protected int invalidMovement;
     protected int validMoves;
     protected int geralMoves;
-
+    protected boolean alive;
     public Robot(String color) {
         this.position = new int[2];
         this.previousPosition = new int[2];
         this.color = color;
+        this.alive = true;
     }
 
     public boolean moveRobot(String sc){
@@ -116,5 +117,11 @@ public class Robot {
     }
     public int getGeralMoves() {
         return getInvalidMovement() + getValidMoves();
+    }
+    public boolean isAlive() {
+        return alive;
+    }
+    public void setAlive(boolean alive) {
+        this.alive = alive;
     }
 }

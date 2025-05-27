@@ -67,6 +67,7 @@ public class Main4 {
             board.updateBoard(robot);
             board.updateBoard(smartRobot);
             board.printVisualBoard();
+
             robot.moveRobot(rand.nextInt(4) + 1); 
             smartRobot.moveRobot(rand.nextInt(4) + 1);              
              
@@ -80,10 +81,16 @@ public class Main4 {
                 if(posObstacle[0] == posSmartRobo[0] && posObstacle[1] == posSmartRobo[1]){
                        obstacle.bater(smartRobot);
                 }
-            }    
-            
-            board.updateBoard(robot);
-            board.updateBoard(smartRobot);
+            }     
+            if (smartRobot.isAlive() == true) {
+                smartRobot.moveRobot(rand.nextInt(4) + 1); 
+                board.updateBoard(smartRobot);
+            }
+            if (robot.isAlive() == true) {
+                robot.moveRobot(rand.nextInt(4) + 1); 
+                board.updateBoard(robot);
+            }                
+
             if(board.foundFood(robot)){
                 board.printVisualBoard();
                 ImageIcon icon = new ImageIcon("C:/Users/guilh/Downloads/trofeu.png");
