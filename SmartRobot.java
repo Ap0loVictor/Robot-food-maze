@@ -7,14 +7,16 @@ public class SmartRobot extends Robot{
         this.lastInvalidMove = 0;
         this.random = new Random();
     }
-    public void moveSmartRobot() {
-        for (int i = 0; i < 4; i++) {
-            int move = random.nextInt(4) + 1;
+    public boolean moveRobot(int move) {
+        isInvalid = true;
+        while (isInvalid) {
+            move = random.nextInt(4) + 1;
             if(move == lastInvalidMove){
                 continue;
             }
             if(moveRobot(move)){
                 lastInvalidMove = 0;
+                isInvalid = false;
                 break;
             } else {
                 lastInvalidMove = move;

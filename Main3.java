@@ -18,7 +18,7 @@ public class Main3 {
         while (menu == 1) {
             System.out.println("Escreva uma cor para o robô 1:");
             String comando1 = scanner.nextLine();
-            System.out.println("Escreva uma cor para o robô 2:");
+            System.out.println("Escreva uma cor para o robô 2 (O inteligente):");
             String comando2 = scanner.nextLine();
 
             System.out.println("Ecolha a posição do eixo X da comida: ");
@@ -39,10 +39,10 @@ public class Main3 {
             board.updateBoard(smartRobot);
             board.printVisualBoard();
 
-            int mover1 = rand.nextInt(3); 
+            int mover1 = rand.nextInt(4); 
             
             robot.moveRobot(mover1 + 1); 
-            smartRobot.moveSmartRobot(); 
+            smartRobot.moveRobot(); 
             board.updateBoard(robot);
             board.updateBoard(smartRobot);
             if(board.foundFood(robot)){
@@ -65,6 +65,12 @@ public class Main3 {
                     "Movimentos",
                     JOptionPane.INFORMATION_MESSAGE, resizedIcon2
                 );
+                System.out.println(robot.invalidMovement);
+                System.out.println(robot.validMoves);
+                System.out.println("===================Smart======================="); 
+                
+                System.out.println(smartRobot.invalidMovement);
+                System.out.println(smartRobot.validMoves);  
                 System.exit(0);
                 break;
             } 
@@ -82,15 +88,22 @@ public class Main3 {
                 frame.setVisible(false);
                 frame.setUndecorated(true);
                 frame.setType(JFrame.Type.UTILITY);
-                JOptionPane.showMessageDialog(frame, "O Robô " + robot.getColor() + " Encontrou a comida! Fim de Jogo!", "Vitória!", JOptionPane.INFORMATION_MESSAGE, resizedIcon);
+                JOptionPane.showMessageDialog(frame, "O Robô " + smartRobot.getColor() + " Encontrou a comida! Fim de Jogo!", "Vitória!", JOptionPane.INFORMATION_MESSAGE, resizedIcon);
                 JOptionPane.showMessageDialog(frame, "Número de movimentos do Robô " + robot.getColor() + " : " + robot.getGeralMoves() + 
                     "\nNúmero de movimentos do Robô " + smartRobot.getColor() + " : " + smartRobot.getGeralMoves(),
                     "Movimentos",
                     JOptionPane.INFORMATION_MESSAGE, resizedIcon2
                 );
+                System.out.println(robot.invalidMovement);
+                System.out.println(robot.validMoves);
+                System.out.println("===================Smart======================="); 
+                
+                System.out.println(smartRobot.invalidMovement);
+                System.out.println(smartRobot.validMoves);
                 System.exit(0);
                 break;
             }
+
         }
         scanner.close();
     
