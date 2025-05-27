@@ -68,29 +68,38 @@ public class Main4 {
             board.updateBoard(smartRobot);
             board.printVisualBoard();
 
-            robot.moveRobot(rand.nextInt(4) + 1); 
-            smartRobot.moveRobot(rand.nextInt(4) + 1);              
-             
-            for (Obstacle obstacle : obstacles) {
-                int[] posObstacle = obstacle.getPosition();
-                int[] posRobo = robot.getPosition();
-                int[] posSmartRobo = smartRobot.getPosition();
-                if(posObstacle[0] == posRobo[0] && posObstacle[1] == posRobo[1]){
-                    obstacle.bater(robot);   
-                }
-                if(posObstacle[0] == posSmartRobo[0] && posObstacle[1] == posSmartRobo[1]){
-                       obstacle.bater(smartRobot);
-                }
-            }     
             if (smartRobot.isAlive() == true) {
                 smartRobot.moveRobot(rand.nextInt(4) + 1); 
                 board.updateBoard(smartRobot);
+                for (Obstacle obstacle : obstacles) {
+                    int[] posObstacle = obstacle.getPosition();
+                    int[] posSmartRobot = smartRobot.getPosition();
+                    if(posObstacle[0] == posSmartRobot[0] && posObstacle[1] == posSmartRobot[1]){
+                        obstacle.bater(smartRobot);
+                        if(obstacle instanceof Bomba){
+                            obstacles.remove(obstacle);
+                        }
+                        break;
+                    }
+                }
             }
             if (robot.isAlive() == true) {
-                robot.moveRobot(rand.nextInt(4) + 1); 
+                robot.moveRobot(rand.nextInt(4) + 1);
                 board.updateBoard(robot);
-            }                
-
+                for (Obstacle obstacle : obstacles) {
+                    int[] posObstacle = obstacle.getPosition();
+                    int[] posRobo = robot.getPosition();
+                    if(posObstacle[0] == posRobo[0] && posObstacle[1] == posRobo[1]){
+                        obstacle.bater(robot);
+                        if(obstacle instanceof Bomba){
+                            obstacles.remove(obstacle);
+                        }
+                        break;
+                    }
+                }    
+            }
+            board.updateBoard(robot);                
+            board.updateBoard(smartRobot);
             if(board.foundFood(robot)){
                 board.printVisualBoard();
                 ImageIcon icon = new ImageIcon("C:/Users/guilh/Downloads/trofeu.png");
@@ -144,7 +153,7 @@ public class Main4 {
 
         }
         scanner.close();
-    
+   
     }
 }
 /*
