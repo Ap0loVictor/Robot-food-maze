@@ -42,7 +42,7 @@ public class Main3 {
             int mover1 = rand.nextInt(4); 
             
             robot.moveRobot(mover1 + 1); 
-            smartRobot.moveRobot(); 
+            smartRobot.moveRobot(mover1 + 1); 
             board.updateBoard(robot);
             board.updateBoard(smartRobot);
             if(board.foundFood(robot)){
@@ -65,12 +65,7 @@ public class Main3 {
                     "Movimentos",
                     JOptionPane.INFORMATION_MESSAGE, resizedIcon2
                 );
-                System.out.println(robot.invalidMovement);
-                System.out.println(robot.validMoves);
-                System.out.println("===================Smart======================="); 
-                
-                System.out.println(smartRobot.invalidMovement);
-                System.out.println(smartRobot.validMoves);  
+          
                 System.exit(0);
                 break;
             } 
@@ -94,12 +89,7 @@ public class Main3 {
                     "Movimentos",
                     JOptionPane.INFORMATION_MESSAGE, resizedIcon2
                 );
-                System.out.println(robot.invalidMovement);
-                System.out.println(robot.validMoves);
-                System.out.println("===================Smart======================="); 
-                
-                System.out.println(smartRobot.invalidMovement);
-                System.out.println(smartRobot.validMoves);
+            
                 System.exit(0);
                 break;
             }
