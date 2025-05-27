@@ -11,8 +11,8 @@ public class Board
     private int foodX;
     private int foodY;
     private int rodada;
-    public List<Robot>[][] tabuleiroVisual;
-
+    private List<Robot>[][] tabuleiroVisual; 
+    
     public Board(int foodX, int foodY) 
     {
         if (foodX < 0 || foodX >= 4 || foodY < 0 || foodY >= 4) {
@@ -92,5 +92,11 @@ public class Board
     }
     public void setFoodY(int foodY) {
         this.foodY = foodY;
+    }
+    public List<Robot>[][] getTabuleiroVisual() {
+        return tabuleiroVisual;
+    }
+    public void setTabuleiroVisual(List<Robot>[][] tabuleiroVisual) {
+        this.tabuleiroVisual = tabuleiroVisual;
     }
 }

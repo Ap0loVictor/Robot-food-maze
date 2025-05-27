@@ -9,8 +9,7 @@ public class Main3 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Random rand = new Random();
-
-        Board board = new Board(2, 3);
+        Board board = null;
         Robot robot = null;
         SmartRobot smartRobot = null;
 
@@ -39,7 +38,7 @@ public class Main3 {
             board.updateBoard(smartRobot);
             board.printVisualBoard();
 
-            int mover1 = rand.nextInt(3); 
+            int mover1 = rand.nextInt(4); 
             
             robot.moveRobot(mover1 + 1); 
             smartRobot.moveSmartRobot(); 
@@ -82,7 +81,7 @@ public class Main3 {
                 frame.setVisible(false);
                 frame.setUndecorated(true);
                 frame.setType(JFrame.Type.UTILITY);
-                JOptionPane.showMessageDialog(frame, "O Robô " + robot.getColor() + " Encontrou a comida! Fim de Jogo!", "Vitória!", JOptionPane.INFORMATION_MESSAGE, resizedIcon);
+                JOptionPane.showMessageDialog(frame, "O Robô " + smartRobot.getColor() + " Encontrou a comida! Fim de Jogo!", "Vitória!", JOptionPane.INFORMATION_MESSAGE, resizedIcon);
                 JOptionPane.showMessageDialog(frame, "Número de movimentos do Robô " + robot.getColor() + " : " + robot.getGeralMoves() + 
                     "\nNúmero de movimentos do Robô " + smartRobot.getColor() + " : " + smartRobot.getGeralMoves(),
                     "Movimentos",
