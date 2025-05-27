@@ -1,17 +1,21 @@
 public class Robot {
     protected int[] position;
+    protected int[] previousPosition;
     protected String color;
     protected int invalidMovement;
     protected int validMoves;
     protected int geralMoves;
     protected boolean alive;
     public Robot(String color) {
-        position = new int[2];
+        this.position = new int[2];
+        this.previousPosition = new int[2];
         this.color = color;
         this.alive = true;
     }
 
     public boolean moveRobot(String sc){
+        previousPosition[0] = position[0];
+        previousPosition[1]= position[1];
         int positionX = position[0];
         int positionY = position[1];
         sc = sc.toLowerCase();
@@ -43,6 +47,8 @@ public class Robot {
         return true;
     }
     public boolean moveRobot(int move){
+        previousPosition[0] = position[0];
+        previousPosition[1]= position[1];
         int positionX = position[0];
         int positionY = position[1];
         switch(move)
@@ -80,10 +86,15 @@ public class Robot {
         this.color = color;
     }
     public void setPosition(int[] position) {
+        previousPosition[0] = position[0];
+        previousPosition[1] = position[1];
         this.position = position;
     }
     public int[] getPosition() {
         return position;
+    }
+    public int[] getPreviousPosition() {
+        return previousPosition;
     }
     public void setInvalidMovement(int invalidMovement) {
         this.invalidMovement = invalidMovement;
