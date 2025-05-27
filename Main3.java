@@ -17,7 +17,7 @@ public class Main3 {
         while (menu == 1) {
             System.out.println("Escreva uma cor para o robô 1:");
             String comando1 = scanner.nextLine();
-            System.out.println("Escreva uma cor para o robô 2:");
+            System.out.println("Escreva uma cor para o robô 2 (O inteligente):");
             String comando2 = scanner.nextLine();
 
             System.out.println("Ecolha a posição do eixo X da comida: ");
@@ -41,7 +41,7 @@ public class Main3 {
             int mover1 = rand.nextInt(4); 
             
             robot.moveRobot(mover1 + 1); 
-            smartRobot.moveSmartRobot(); 
+            smartRobot.moveRobot(mover1 + 1); 
             board.updateBoard(robot);
             board.updateBoard(smartRobot);
             if(board.foundFood(robot)){
@@ -64,6 +64,7 @@ public class Main3 {
                     "Movimentos",
                     JOptionPane.INFORMATION_MESSAGE, resizedIcon2
                 );
+          
                 System.exit(0);
                 break;
             } 
@@ -87,9 +88,11 @@ public class Main3 {
                     "Movimentos",
                     JOptionPane.INFORMATION_MESSAGE, resizedIcon2
                 );
+            
                 System.exit(0);
                 break;
             }
+
         }
         scanner.close();
     

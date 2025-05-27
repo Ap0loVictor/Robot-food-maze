@@ -4,6 +4,7 @@ public class Robot {
     protected int invalidMovement;
     protected int validMoves;
     protected int geralMoves;
+
     public Robot(String color) {
         position = new int[2];
         this.color = color;
@@ -90,6 +91,7 @@ public class Robot {
         return invalidMovement;
     }
     public void incrementInvalidMovement(){
+        
         this.invalidMovement++;
     }
     public void setValidMoves(int validMoves) {
