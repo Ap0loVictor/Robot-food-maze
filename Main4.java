@@ -12,13 +12,10 @@ public class Main4 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Random rand = new Random();
-
         Board board = null;
         Robot robot = null;
         SmartRobot smartRobot = null;
-        List<Rocha> rochas = new ArrayList<>();
-        List<Bomba> bombas = new ArrayList<>();
-
+        List<Obstacle> obstacles = new ArrayList<>();
         int menu = 1;
         while (menu == 1) {
             System.out.println("============================================================");
@@ -55,10 +52,10 @@ public class Main4 {
             int positionY = scanner.nextInt();
 
             if(escolha == 1){
-                bombas.add(new Bomba(positionX, positionY));
+                obstacles.add(new Bomba(positionX, positionY));
             }
             else if(escolha == 2){
-                rochas.add(new Rocha(positionX, positionY));
+                obstacles.add(new Rocha(positionX, positionY));
             }
             else{
                 System.out.println("Escreva um dos números indicados");
@@ -67,15 +64,24 @@ public class Main4 {
             
         }
         while (menu == 3) {
-
             board.updateBoard(robot);
             board.updateBoard(smartRobot);
             board.printVisualBoard();
-
-            int mover1 = rand.nextInt(4); 
+            robot.moveRobot(rand.nextInt(4) + 1); 
+            smartRobot.moveRobot(rand.nextInt(4) + 1);              
+             
+            for (Obstacle obstacle : obstacles) {
+                int[] posObstacle = obstacle.getPosition();
+                int[] posRobo = robot.getPosition();
+                int[] posSmartRobo = smartRobot.getPosition();
+                if(posObstacle[0] == posRobo[0] && posObstacle[1] == posRobo[1]){
+                    obstacle.bater(robot);   
+                }
+                if(posObstacle[0] == posSmartRobo[0] && posObstacle[1] == posSmartRobo[1]){
+                       obstacle.bater(smartRobot);
+                }
+            }    
             
-            robot.moveRobot(mover1 + 1); 
-            smartRobot.moveRobot(mover1 + 1); 
             board.updateBoard(robot);
             board.updateBoard(smartRobot);
             if(board.foundFood(robot)){
