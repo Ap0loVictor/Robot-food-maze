@@ -63,14 +63,13 @@ public class Main4 {
             
             
         }
+        board.updateBoard(smartRobot);
+        board.updateBoard(robot);
         while (menu == 3) {
-            board.updateBoard(robot);
-            board.updateBoard(smartRobot);
             board.printVisualBoard();
 
             if (smartRobot.isAlive() == true) {
                 smartRobot.moveRobot(rand.nextInt(4) + 1); 
-                board.updateBoard(smartRobot);
                 for (Obstacle obstacle : obstacles) {
                     int[] posObstacle = obstacle.getPosition();
                     int[] posSmartRobot = smartRobot.getPosition();
@@ -83,9 +82,11 @@ public class Main4 {
                     }
                 }
             }
+            if (smartRobot.isAlive()) {
+                board.updateBoard(smartRobot);
+            }
             if (robot.isAlive() == true) {
                 robot.moveRobot(rand.nextInt(4) + 1);
-                board.updateBoard(robot);
                 for (Obstacle obstacle : obstacles) {
                     int[] posObstacle = obstacle.getPosition();
                     int[] posRobo = robot.getPosition();
@@ -98,8 +99,10 @@ public class Main4 {
                     }
                 }    
             }
-            board.updateBoard(robot);                
-            board.updateBoard(smartRobot);
+            if (robot.isAlive()){
+                board.updateBoard(robot);
+            }
+
             if(board.foundFood(robot)){
                 board.printVisualBoard();
                 ImageIcon icon = new ImageIcon("C:/Users/guilh/Downloads/trofeu.png");
