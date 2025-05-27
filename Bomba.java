@@ -4,7 +4,8 @@ public class Bomba extends Obstacle{
     }
     @Override
     public void bater(Robot robot){
-        
+        System.out.println("O robô bateu na bomba e morreu!!!");
+        robot.setAlive(false);
     }
 
 }

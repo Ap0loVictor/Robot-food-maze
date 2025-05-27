@@ -73,11 +73,15 @@ public class Main4 {
             board.printVisualBoard();
 
             int mover1 = rand.nextInt(4); 
-            
+            if (smartRobot.isAlive() == true) {
+                smartRobot.moveRobot(mover1 + 1); 
+                board.updateBoard(smartRobot);
+            }
+            if (robot.isAlive() == true) {
             robot.moveRobot(mover1 + 1); 
-            smartRobot.moveRobot(mover1 + 1); 
             board.updateBoard(robot);
-            board.updateBoard(smartRobot);
+        }                
+
             if(board.foundFood(robot)){
                 board.printVisualBoard();
                 ImageIcon icon = new ImageIcon("C:/Users/guilh/Downloads/trofeu.png");
