@@ -54,18 +54,15 @@ public class Main2 {
                 board.updateBoard(robot1);
                 board.updateBoard(robot2);
                 board.printVisualBoard();
-                System.out.println("O Robo " + robot1.getColor() + " encontrou a comida, Fim de Jogo!");
-                
-                System.out.println("\nRelatório final de movimentos:");
-                System.out.println("Robô " + robot1.getColor() + ":");
-                System.out.println(" - Movimentos inválidos: " + robot1.getInvalidMovement());
 
-                System.out.println("Robô " + robot2.getColor() + ":");
-                System.out.println(" - Movimentos inválidos: " + robot2.getInvalidMovement());
 
                 ImageIcon icon = new ImageIcon("C:/Users/guilh/Downloads/trofeu.png");
+                ImageIcon icon2 = new ImageIcon("C:/Users/guilh/Downloads/Robo.jpg");
+
                 Image image = icon.getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH);
+                Image image2 = icon2.getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH);
                 ImageIcon resizedIcon = new ImageIcon(image);
+                ImageIcon resizedIcon2 = new ImageIcon(image2);
                 JFrame frame = new JFrame();
                 frame.setAlwaysOnTop(true);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,6 +70,12 @@ public class Main2 {
                 frame.setUndecorated(true);
                 frame.setType(JFrame.Type.UTILITY);
                 JOptionPane.showMessageDialog(frame, "O robô " + robot1.getColor() + " encontrou a comida! Fim de Jogo!", "Vitória!", JOptionPane.INFORMATION_MESSAGE, resizedIcon);
+                JOptionPane.showMessageDialog(frame, "Número de movimentos inválidos do Robô " + robot1.getColor() + " : " + robot1.getInvalidMovement() + 
+                    "\nNúmero de movimentos válidos do Robô " + robot1.getColor() + " : " + robot1.getValidMoves() + "\nNúmero de movimentos inválidos do Robô " + robot2.getColor() + " : " + robot2.getInvalidMovement()
+                    + "\nNúmero de movimentos válidos do Robô " + robot2.getColor() + " : " + robot2.getValidMoves(),
+                    "Relatório de Movimentos",
+                    JOptionPane.INFORMATION_MESSAGE, resizedIcon2
+                );
                 System.exit(0);
                 break;
             }
@@ -81,18 +84,15 @@ public class Main2 {
                 board.updateBoard(robot1);
                 board.updateBoard(robot2);
                 board.printVisualBoard();
-                System.out.println("O Robo " + robot2.getColor() + " encontrou a comida, Fim de Jogo!");
-                
-                System.out.println("\nRelatório final de movimentos:");
-                System.out.println("Robô " + robot1.getColor() + ":");
-                System.out.println(" - Movimentos inválidos: " + robot1.getInvalidMovement());
-
-                System.out.println("Robô " + robot2.getColor() + ":");
-                System.out.println(" - Movimentos inválidos: " + robot2.getInvalidMovement());
+        
 
                 ImageIcon icon = new ImageIcon("C:/Users/guilh/Downloads/trofeu.png");
+                ImageIcon icon2 = new ImageIcon("C:/Users/guilh/Downloads/Robo.jpg");
+
                 Image image = icon.getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH);
+                Image image2 = icon2.getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH);
                 ImageIcon resizedIcon = new ImageIcon(image);
+                ImageIcon resizedIcon2 = new ImageIcon(image2);                
                 JFrame frame = new JFrame();
                 frame.setAlwaysOnTop(true);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -100,6 +100,14 @@ public class Main2 {
                 frame.setUndecorated(true);
                 frame.setType(JFrame.Type.UTILITY);
                 JOptionPane.showMessageDialog(frame, "O robô " + robot2.getColor() + " encontrou a comida! Fim de Jogo!", "Vitória!", JOptionPane.INFORMATION_MESSAGE, resizedIcon);
+                
+                
+               JOptionPane.showMessageDialog(frame, "Número de movimentos inválidos do Robô " + robot1.getColor() + " : " + robot1.getInvalidMovement() + 
+                    "\nNúmero de movimentos válidos do Robô " + robot1.getColor() + " : " + robot1.getValidMoves() + "\nNúmero de movimentos inválidos do Robô " + robot2.getColor() + " : " + robot2.getInvalidMovement()
+                    + "\nNúmero de movimentos válidos do Robô " + robot2.getColor() + " : " + robot2.getValidMoves(),
+                    "Relatório de Movimentos",
+                    JOptionPane.INFORMATION_MESSAGE, resizedIcon2
+                );
                 System.exit(0);
                 break;
             }
