@@ -2,6 +2,8 @@ public class Robot {
     protected int[] position;
     protected String color;
     protected int invalidMovement;
+    protected int validMoves;
+    protected int geralMoves;
     public Robot(String color) {
         position = new int[2];
         this.color = color;
@@ -30,10 +32,12 @@ public class Robot {
                 return false; 
         }
         if (positionX < 0 || positionX > 3 || positionY < 0 || positionY > 3) {
+            incrementInvalidMovement();
             return false; // Movimento inválido, não atualiza posição
         }
         this.position[0] = positionX;
         this.position[1] = positionY;
+        validMoves++;
         return true;
     }
     public boolean moveRobot(int move){
@@ -62,6 +66,7 @@ public class Robot {
         }
         this.position[0] = positionX;
         this.position[1] = positionY;
+        validMoves++;
         return true;
     }
     
@@ -86,5 +91,17 @@ public class Robot {
     }
     public void incrementInvalidMovement(){
         this.invalidMovement++;
+    }
+    public void setValidMoves(int validMoves) {
+        this.validMoves = validMoves;
+    }
+    public int getValidMoves() {
+        return validMoves;
+    }
+    public void setGeralMoves(int geralMoves) {
+        this.geralMoves = geralMoves;
+    }
+    public int getGeralMoves() {
+        return getInvalidMovement() + getValidMoves();
     }
 }

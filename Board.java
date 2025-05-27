@@ -10,6 +10,7 @@ public class Board
     // private Robot[] robots;
     private int foodX;
     private int foodY;
+    private int rodada;
     public List<Robot>[][] tabuleiroVisual;
 
     public Board(int foodX, int foodY) 
@@ -28,29 +29,31 @@ public class Board
             }
         }
     }
-
+    
     public void printVisualBoard() {
-        System.out.println("\n==========================");
+        rodada++;
+        System.out.println( rodada + "º Rodada");
+        System.out.println("\n============================================================");
             for (int i = 0; i < 4; i++) {
                 for (int j = 0; j < 4; j++) {
                     if ((i == foodY)&& (j == foodX)){
 
-                        System.out.print("[ " + "Food" + "  ]\t"); 
+                        System.out.print("[   " + "FOOD" + "  ]\t"); 
                     }
                     else if (!tabuleiroVisual[i][j].isEmpty()) {    
-                        System.out.print("[");
+                        System.out.print("[  ");
                         for (Robot r : tabuleiroVisual[i][j]) {
                             System.out.print(r.getColor() + " "); 
                         }
-                        System.out.print("]\t");
+                        System.out.print("  ]\t");
                     } else {
-                    System.out.print("[       ]\t");
+                    System.out.print("[         ]\t");
                 } 
                 }
                 System.out.println();
             }
         
-        System.out.println("=================================");
+        System.out.println("=============================================================");
     }
 
     public void updateBoard(Robot robot){
