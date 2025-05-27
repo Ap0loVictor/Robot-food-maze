@@ -27,12 +27,19 @@ public class Main4 {
             System.out.println("Escreva uma cor para o robô inteligente:");
             String comando2 = scanner.nextLine();
 
+            boolean posicaoValida = false;
+            while(!posicaoValida){
             System.out.println("Ecolha a posição do eixo X da comida: ");
             int eixoXComida = scanner.nextInt();
             System.out.println("Ecolha a posição do eixo Y da comida: ");
             int eixoYComida = scanner.nextInt();
-
-            board = new Board(eixoXComida-1, eixoYComida-1);
+             try {
+            board = new Board(eixoXComida-1, eixoYComida-1, rochas, bombas);
+            posicaoValida = true;
+            } catch (IllegalArgumentException e) {
+                 System.out.println("Erro: " + e.getMessage() + " Tente novamente.");
+            }
+            }
 
             robot = new Robot(comando1);
             smartRobot = new SmartRobot(comando2);

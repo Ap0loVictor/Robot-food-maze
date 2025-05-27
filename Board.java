@@ -12,6 +12,8 @@ public class Board
     private int foodY;
     private int rodada;
     private List<Robot>[][] tabuleiroVisual; 
+    private List<Rocha> rochas;
+    private List<Bomba> bombas;
     
     public Board(int foodX, int foodY) 
     {
@@ -29,6 +31,26 @@ public class Board
             }
         }
     }
+
+    public Board(int foodX, int foodY, List<Rocha> rochas, List<Bomba> bombas) 
+    {
+        if (foodX < 0 || foodX >= 4 || foodY < 0 || foodY >= 4) {
+        throw new IllegalArgumentException("Posição da comida está fora dos limites do tabuleiro (4x4).");
+    }
+        this.foodX = foodX;
+        this.foodY = foodY;
+        this.rochas = rochas;
+        this.bombas = bombas;
+        this.tabuleiroVisual = new ArrayList[4][4];
+
+        for (int i = 0; i < 4; i++) 
+        {
+            for (int j = 0; j < 4; j++) {
+                this.tabuleiroVisual[i][j] = new ArrayList<>();
+            }
+        }
+    }
+
     
     public void printVisualBoard() {
         rodada++;
@@ -39,8 +61,11 @@ public class Board
                     if ((i == foodY)&& (j == foodX)){
 
                         System.out.print("[   " + "FOOD" + "  ]\t"); 
-                    }
-                    else if (!tabuleiroVisual[i][j].isEmpty()) {    
+                    } else if (foundBomb(j,i)){
+                        System.out.print("[   " + "BOMB" + "  ]\t");
+                    } else if (foundObstacle(j,i)){
+                        System.out.println("[   " + "ROCK" + "  ]\t");
+                    } else if (!tabuleiroVisual[i][j].isEmpty()) {    
                         System.out.print("[  ");
                         for (Robot r : tabuleiroVisual[i][j]) {
                             System.out.print(r.getColor() + " "); 
@@ -77,9 +102,32 @@ public class Board
         if (r.position[0] == foodX && r.position[1] == foodY){
             foodX = -1;
             foodY = -1;
-        return true; 
-    } return false;
+            return true; 
+        } return false;
+    }
+   public boolean foundBomb(int x, int y){
+        if (bombas == null){
+        return false;
+        } else {
+        for (Bomba b : bombas){
+            if (b.eixoX == x && b.eixoY == y) {
+                return true;
+            }
+        }
+        return false;
+        }
     } 
+    public boolean foundObstacle(int x, int y) {
+        if(rochas == null){
+            return false;
+        }   
+        for (Rocha r : rochas) {
+        if (r.eixoX == x && r.eixoY == y) {
+            return true;
+        }
+    }
+    return false;
+}
 
     public int getFoodX() {
         return foodX;
