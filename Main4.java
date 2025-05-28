@@ -4,6 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -34,7 +35,7 @@ public class Main4 {
                 System.out.println("Escolha a posição do eixo Y da comida: ");
                 eixoYComida = scanner.nextInt();
                  try {
-            board = new Board(eixoXComida-1, eixoYComida-1);
+            board = new Board(eixoXComida, eixoYComida);
             posicaoValida = true;
             } catch (IllegalArgumentException e) {
                  System.out.println("Erro: " + e.getMessage() + " Tente novamente.");
@@ -73,7 +74,7 @@ public class Main4 {
         }
 
         try {
-            board = new Board(eixoXComida - 1, eixoYComida - 1, obstacles);
+            board = new Board(eixoXComida, eixoYComida, obstacles);
         } catch (IllegalArgumentException e) {
             System.out.println("Erro ao criar o tabuleiro: " + e.getMessage());
             System.exit(1);
@@ -85,39 +86,56 @@ public class Main4 {
 
             if (smartRobot.isAlive() == true) {
                 smartRobot.moveRobot(rand.nextInt(4) + 1); 
-                for (Obstacle obstacle : obstacles) {
+                Iterator<Obstacle> iterator = obstacles.iterator();
+                while(iterator.hasNext()) {
+                    Obstacle obstacle = iterator.next();
                     int[] posObstacle = obstacle.getPosition();
                     int[] posSmartRobot = smartRobot.getPosition();
                     if(posObstacle[0] == posSmartRobot[0] && posObstacle[1] == posSmartRobot[1]){
                         obstacle.bater(smartRobot);
                         if(obstacle instanceof Bomba){
-                            obstacles.remove(obstacle);
+                            iterator.remove();
                         }
                         break;
                     }
                 }
             }
-            if (smartRobot.isAlive()) {
-                board.updateBoard(smartRobot);
-            }
+           
+            board.updateBoard(smartRobot);
             if (robot.isAlive() == true) {
+                Iterator<Obstacle> iterator = obstacles.iterator(); 
                 robot.moveRobot(rand.nextInt(4) + 1);
-                for (Obstacle obstacle : obstacles) {
+                while(iterator.hasNext()) {
+                    Obstacle obstacle = iterator.next();
                     int[] posObstacle = obstacle.getPosition();
                     int[] posRobo = robot.getPosition();
                     if(posObstacle[0] == posRobo[0] && posObstacle[1] == posRobo[1]){
                         obstacle.bater(robot);
                         if(obstacle instanceof Bomba){
-                            obstacles.remove(obstacle);
+                            iterator.remove();
                         }
                         break;
                     }
                 }    
             }
-            if (robot.isAlive()){
+            board.updateBoard(robot);
+            if ((robot.isAlive() == false)&&(smartRobot.isAlive() == false)) {
                 board.updateBoard(robot);
+                board.updateBoard(smartRobot);
+                board.printVisualBoard();
+                ImageIcon icon = new ImageIcon("C://Users//guilh//Downloads//roboMorto.jpg");
+                Image image = icon.getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH);
+                ImageIcon resizedIcon = new ImageIcon(image);
+                JFrame frame = new JFrame();
+                frame.setAlwaysOnTop(true);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setVisible(false);
+                frame.setUndecorated(true);
+                frame.setType(JFrame.Type.UTILITY);
+                JOptionPane.showMessageDialog(frame, "Os dois robôs morreram!", "Fim de Jogo", JOptionPane.INFORMATION_MESSAGE, resizedIcon);
+                System.out.println("Os dois robôs morreram");
+                break;
             }
-
             if(board.foundFood(robot)){
                 board.printVisualBoard();
                 ImageIcon icon = new ImageIcon("C:/Users/guilh/Downloads/trofeu.png");
