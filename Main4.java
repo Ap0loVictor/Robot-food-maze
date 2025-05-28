@@ -31,9 +31,9 @@ public class Main4 {
             boolean posicaoValida = false;
             while(!posicaoValida){
                 System.out.println("Escolha a posição do eixo X da comida: ");
-                eixoXComida = scanner.nextInt();
+                eixoXComida = scanner.nextInt() -1;
                 System.out.println("Escolha a posição do eixo Y da comida: ");
-                eixoYComida = scanner.nextInt();
+                eixoYComida = scanner.nextInt() -1;
                  try {
             board = new Board(eixoXComida, eixoYComida);
             posicaoValida = true;
@@ -74,7 +74,7 @@ public class Main4 {
 
         
             if (positionX < 0 || positionX >= 4 || positionY < 0 || positionY >= 4) {
-                System.out.println("Posição fora dos limites do tabuleiro (1 a 4). Tente novamente.");
+                System.out.println("Erro: Posição fora dos limites do tabuleiro (1 a 4). Tente novamente.");
                 continue;
             }
 
@@ -83,8 +83,8 @@ public class Main4 {
             continue;
         }
         
-            if (positionX == eixoXComida - 1 && positionY == eixoYComida - 1) {
-                System.out.println("Erro: Comida não pode estar na mesma posição que um obstáculo. Tente novamente.");
+            if (positionX == eixoXComida && positionY == eixoYComida ) {
+                System.out.println("Erro: Obstaculo não pode estar na mesma posição que uma comida. Tente novamente.");
                 continue;
             }
 
@@ -111,8 +111,8 @@ public class Main4 {
 
         for (Obstacle o : obstacles) {
             int[] pos = o.getPosition();
-            if (pos[0] == eixoXComida - 1 && pos[1] == eixoYComida - 1) {
-                System.out.println("Erro: Comida não pode estar na mesma posição que um obstáculo.");
+            if (pos[0] == eixoXComida && pos[1] == eixoYComida ) {
+                System.out.println("Erro: Obstaculo não pode estar na mesma posição que uma comida.");
                 System.exit(1);
             }
         }
