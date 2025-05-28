@@ -34,7 +34,7 @@ public class Main4 {
                 System.out.println("Escolha a posição do eixo Y da comida: ");
                 eixoYComida = scanner.nextInt();
                  try {
-            board = new Board(eixoXComida-1, eixoYComida-1);
+            board = new Board(eixoXComida, eixoYComida);
             posicaoValida = true;
             } catch (IllegalArgumentException e) {
                  System.out.println("Erro: " + e.getMessage() + " Tente novamente.");
@@ -73,7 +73,7 @@ public class Main4 {
         }
 
         try {
-            board = new Board(eixoXComida - 1, eixoYComida - 1, obstacles);
+            board = new Board(eixoXComida, eixoYComida, obstacles);
         } catch (IllegalArgumentException e) {
             System.out.println("Erro ao criar o tabuleiro: " + e.getMessage());
             System.exit(1);
@@ -116,6 +116,10 @@ public class Main4 {
             }
             if (robot.isAlive()){
                 board.updateBoard(robot);
+            }
+            if ((robot.isAlive() == false)&&(smartRobot.isAlive() == false)) {
+                System.out.println("Os dois robôs morreram");
+                break;
             }
 
             if(board.foundFood(robot)){

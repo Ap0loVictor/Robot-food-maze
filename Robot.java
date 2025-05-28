@@ -77,7 +77,17 @@ public class Robot {
         validMoves++;
         return true;
     }
-    
+    public int[] previewMove(int move) {
+        int tx = position[0], ty = position[1];
+        switch(move) {
+            case 1: ty--; break; // up
+            case 2: ty++; break; // down
+            case 3: tx--; break; // left
+            case 4: tx++; break; // right
+        }
+        return new int[]{ tx, ty };
+    }
+
     public String getColor() {
         return color;
     }
@@ -88,7 +98,8 @@ public class Robot {
     public void setPosition(int[] position) {
         previousPosition[0] = position[0];
         previousPosition[1] = position[1];
-        this.position = position;
+        this.position[0] = position[0];         
+        this.position[1] = position[1];
     }
     public int[] getPosition() {
         return position;
