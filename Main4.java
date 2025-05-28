@@ -190,7 +190,6 @@ public class Main4 {
                 frame.setUndecorated(true);
                 frame.setType(JFrame.Type.UTILITY);
                 JOptionPane.showMessageDialog(frame, "Os dois robôs morreram!", "Fim de Jogo", JOptionPane.INFORMATION_MESSAGE, resizedIcon);
-                System.out.println("Os dois robôs morreram");
                 break;
             }
             if ((robot.isAlive() == false)&&(smartRobot.isAlive() == false)) {
