@@ -118,10 +118,29 @@ public class Main4 {
                 board.updateBoard(robot);
             }
 
-            if (board.foundFood(robot)) {
+            if(board.foundFood(robot)){
                 board.printVisualBoard();
-                exibirMensagens(robot, smartRobot);
+                ImageIcon icon = new ImageIcon("C:/Users/guilh/Downloads/trofeu.png");
+                ImageIcon icon2 = new ImageIcon("C:/Users/guilh/Downloads/Robo.jpg");
+                Image image = icon.getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH);
+                Image image2 = icon2.getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH);
+                ImageIcon resizedIcon = new ImageIcon(image);
+                ImageIcon resizedIcon2 = new ImageIcon(image2);
+                JFrame frame = new JFrame();
+                frame.setAlwaysOnTop(true);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setVisible(false);
+                frame.setUndecorated(true);
+                frame.setType(JFrame.Type.UTILITY);
+                JOptionPane.showMessageDialog(frame, "O Robô " + robot.getColor() + " Encontrou a comida! Fim de Jogo!", "Vitória!", JOptionPane.INFORMATION_MESSAGE, resizedIcon);
+                JOptionPane.showMessageDialog(frame, "Número de movimentos do Robô " + robot.getColor() + " : " + robot.getGeralMoves() + 
+                    "\nNúmero de movimentos do Robô " + smartRobot.getColor() + " : " + smartRobot.getGeralMoves(),
+                    "Movimentos",
+                    JOptionPane.INFORMATION_MESSAGE, resizedIcon2
+                );
+
                 System.exit(0);
+                break;
             }
             if (board.foundFood(smartRobot)) {
                 board.printVisualBoard();
