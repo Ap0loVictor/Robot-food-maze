@@ -44,7 +44,7 @@ public class Board {
                 this.tabuleiroVisual[i][j] = new ArrayList<>();
             }
         }
-
+        
         for (Obstacle o : obstacles) {
             if (o instanceof Rocha) {
                 this.rochas.add((Rocha) o);
@@ -53,6 +53,7 @@ public class Board {
             }
         }
     }
+
 
     public void printVisualBoard() {
         rodada++;
