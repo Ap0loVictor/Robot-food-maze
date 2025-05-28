@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Board {
     private int foodX;
@@ -82,24 +83,28 @@ public class Board {
     }
 
     public void updateBoard(Robot robot) {
-        try {
-            // Remove o robô da posição anterior
-            for (int i = 0; i < 4; i++) {
-                for (int j = 0; j < 4; j++) {
-                    tabuleiroVisual[i][j].remove(robot);
-                }
+    try {
+        // Remove o robô de todas as células, vivo ou morto
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                tabuleiroVisual[i][j].remove(robot);
             }
-            // Adiciona o robô na nova posição
-            int[] pos = robot.getPosition();
-            int x = pos[0];
-            int y = pos[1];
-            tabuleiroVisual[y][x].add(robot);
-        } catch (ArrayIndexOutOfBoundsException error) {
-            robot.incrementInvalidMovement();
         }
+
+        // Adiciona o robô na posição atual, vivo ou morto
+        int[] pos = robot.getPosition();
+        int x = pos[0];
+        int y = pos[1];
+
+        tabuleiroVisual[y][x].add(robot);
+
+    } catch (ArrayIndexOutOfBoundsException error) {
+        robot.incrementInvalidMovement();
     }
+}
 
     public boolean foundFood(Robot r) {
+        
         if (r.position[0] == foodX && r.position[1] == foodY) {
             foodX = -1;
             foodY = -1;
@@ -109,7 +114,13 @@ public class Board {
     }
 
     private boolean foundBomb(int x, int y) {
-        for (Bomba b : bombas) {
+        Iterator<Bomba> it = bombas.iterator();
+        while (it.hasNext()) {
+        Bomba b = it.next();
+        if (!b.actived) {
+            it.remove();
+            continue;
+        }
             int[] pos = b.getPosition();
             if (pos[0] == x && pos[1] == y) {
                 return true;
