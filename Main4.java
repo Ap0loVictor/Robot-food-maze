@@ -34,12 +34,13 @@ public class Main4 {
                 System.out.println("Escolha a posição do eixo Y da comida: ");
                 eixoYComida = scanner.nextInt();
                  try {
-            board = new Board(eixoXComida, eixoYComida);
+            board = new Board(eixoXComida-1, eixoYComida-1);
             posicaoValida = true;
             } catch (IllegalArgumentException e) {
                  System.out.println("Erro: " + e.getMessage() + " Tente novamente.");
             }
             }
+            scanner.nextLine(); // Consumir o \n que ficou no buffer
 
             robot = new Robot(comando1);
             smartRobot = new SmartRobot(comando2);
@@ -58,28 +59,84 @@ public class Main4 {
                 break;
             }
 
-            System.out.print("Posição X: ");
-            int positionX = scanner.nextInt();
-            System.out.print("Posição Y: ");
-            int positionY = scanner.nextInt();
+            if (escolha != 1 && escolha != 2) {
+                System.out.println("Escreva um dos números indicados.");
+                continue;
+            }
 
+            boolean posicaoValida = false;
+            while (!posicaoValida) {
+                System.out.print("Posição X: ");
+                int positionX = scanner.nextInt() - 1; 
+                System.out.print("Posição Y: ");
+                int positionY = scanner.nextInt() - 1; 
+
+        
+            if (positionX < 0 || positionX >= 4 || positionY < 0 || positionY >= 4) {
+                System.out.println("Posição fora dos limites do tabuleiro (1 a 4). Tente novamente.");
+                continue;
+            }
+
+            if (positionX == 0 && positionY == 0) {
+            System.out.println("Erro: Não é permitido adicionar obstáculos na posição (1,1). Tente novamente.");
+            continue;
+        }
+        
+            if (positionX == eixoXComida - 1 && positionY == eixoYComida - 1) {
+                System.out.println("Erro: Comida não pode estar na mesma posição que um obstáculo. Tente novamente.");
+                continue;
+            }
+
+            boolean jaExiste = false;
+            for (Obstacle o : obstacles) {
+                int[] pos = o.getPosition();
+                if (pos[0] == positionX && pos[1] == positionY) {
+                    System.out.println("Erro: Já existe um obstáculo nesta posição. Tente outra posição.");
+                    jaExiste = true;
+                    break;
+                }
+            }
+            if (jaExiste) {
+                continue;
+            }
             if (escolha == 1) {
                 obstacles.add(new Bomba(positionX, positionY));
-            } else if (escolha == 2) {
-                obstacles.add(new Rocha(positionX, positionY));
             } else {
-                System.out.println("Escreva um dos números indicados");
+                obstacles.add(new Rocha(positionX, positionY));
+            }
+            posicaoValida = true; 
+        }
+}
+
+        for (Obstacle o : obstacles) {
+            int[] pos = o.getPosition();
+            if (pos[0] == eixoXComida - 1 && pos[1] == eixoYComida - 1) {
+                System.out.println("Erro: Comida não pode estar na mesma posição que um obstáculo.");
+                System.exit(1);
             }
         }
 
+        for (int i = 0; i < obstacles.size(); i++) {
+            int[] posI = obstacles.get(i).getPosition();
+            for (int j = i + 1; j < obstacles.size(); j++) {
+                int[] posJ = obstacles.get(j).getPosition();
+                    if (posI[0] == posJ[0] && posI[1] == posJ[1]) {
+                        System.out.println("Erro: Dois obstáculos não podem ocupar a mesma posição.");
+                        System.exit(1);
+                    }
+                }
+        }
+
         try {
-            board = new Board(eixoXComida, eixoYComida, obstacles);
+            board = new Board(eixoXComida - 1, eixoYComida - 1, obstacles);
         } catch (IllegalArgumentException e) {
             System.out.println("Erro ao criar o tabuleiro: " + e.getMessage());
             System.exit(1);
         }
+
         board.updateBoard(smartRobot);
         board.updateBoard(robot);
+
         while (menu == 3) {
             board.printVisualBoard();
 
@@ -170,17 +227,7 @@ public class Main4 {
                 System.exit(0);
                 break;
             }
-
-
-
         }
         scanner.close();
-   
-    }
+    }   
 }
-/*
-    Main4 : Crie uma classe Main que instancie um robô normal e outro inteligente, peça ao usuário para entrar com a 
-            posição do alimento e inserir algumas bombas e rochas no tabuleiro, e faça os dois robôs se moverem 
-            randomicamente, um de cada vez, até que um deles encontre o alimento ou ambos explodam.
-            Ao final, mostre o número de movimentos que cada robô fez para encontrar o alimento ou até explodir.
-*/
